@@ -1,0 +1,61 @@
+@model List<AuthorModel>
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2 style="text-align: center">Authors</h2>
+<div class="mt-3 ml-3 mr-3" style="text-align: center;">
+    <button class="mr-2 ml-2" onclick="location.href='https://localhost:5001'">Go back Home</button>
+</div>
+<div class="mt-3 ml-3 mr-3" style="text-align: center;">
+    <div class="row">
+        <div class="col-4">
+            <form method="post" asp-controller="Authors" asp-action="AddAuthor">
+                <p>First Name</p><br>
+                <input type="text" name="FirstName" required><br>
+                <p>Last Name</p><br>
+                <input type="text" name="LastName" required><br>
+                <p>Age</p><br>
+                <input type="number" name="Age" required><br>
+                <button type="submit" class="btn btn-dark">Create Author</button>
+            </form>
+        </div>
+        <div class="col-8 card">
+            <div class="row card-header">
+                <div class="col-1">
+                    Id
+                </div>
+                <div class="col-5">
+                    First Name
+                </div>
+                <div class="col-3">
+                    Last Name
+                </div>
+                <div class="col-2">
+                    Age
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row card-body">
+                @foreach (var attentionAuthor in Model) {
+                    <div class="col-1">
+                        @attentionAuthor.Id
+                    </div>
+                    <div class="col-4">
+                        @attentionAuthor.FirstName
+                    </div>
+                    <div class="col-4">
+                        @attentionAuthor.LastName
+                    </div>
+                    <div class="col-2">
+                        @attentionAuthor.Age
+                    </div>
+                    <div class="col-1">
+                        <a asp-controller="Authors" asp-action="RemoveAuthor" asp-route-removedAuthor="@attentionAuthor.Id">X</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

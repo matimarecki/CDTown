@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ProjectZero.Data;
 using ProjectZero.Models;
 
@@ -11,7 +12,6 @@ namespace ProjectZero.Services {
     }
     public class AuthorService : IAuthorService {
         private readonly ApplicationDbContext dbContext;
-
         public AuthorService(ApplicationDbContext dbContext) {
             this.dbContext = dbContext;
         }
@@ -21,9 +21,11 @@ namespace ProjectZero.Services {
         }
 
         public void RemoveAuthor(int removeAuthor) {
-            AuthorModel burningAuthor = ShowAuthors().FirstOrDefault(n =>
-                n.Id == removeAuthor);
+            AuthorModel burningAuthor = this.dbContext.Authors
+                .Include(n => n.Connections)
+                .FirstOrDefault(n => n.Id == removeAuthor);
             dbContext.Remove(burningAuthor);
+            dbContext.RemoveRange(burningAuthor.Connections);
             dbContext.SaveChanges();
         }
 

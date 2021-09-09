@@ -1,0 +1,35 @@
+@model LibraryModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2 style="text-align: center">New Connection</h2>
+<div style="text-align: center">
+    <button class="btn btn-dark" onclick="location.href='https://localhost:5001/Connections'">Back</button>
+</div>
+<div class="card">
+    <div class="card-header">
+        <form method="post" asp-controller="Connections" asp-action="AddConnection">
+            <div class="row">
+                <div class="col-5 card-body" style="text-align: center">
+                    <select name="authorId" style="min-width: 300px">
+                        @foreach (var selAuthor in Model.AllTheAuthors) {
+                            <option value="@selAuthor.Id"> @selAuthor.FirstName @selAuthor.LastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-2 card-body" style="text-align: center">
+                    <button type="submit" class="btn btn-dark">Connect them</button>
+                </div>
+                <div class="col-5 card-body" style="text-align: center">
+                    <select name="bookId" style="min-width: 300px">
+                        @foreach (var selBook in Model.AllTheBooks) {
+                            <option value="@selBook.Id"> @selBook.Name (@selBook.ReleaseYear)</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

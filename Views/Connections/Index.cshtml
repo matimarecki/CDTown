@@ -1,0 +1,36 @@
+@model List<LibraryConnectionModel>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2 style="text-align: center">Connections</h2>
+<div style="text-align: center">
+    <button class="btn btn-dark" onclick="location.href='https://localhost:5001'">Return Home</button>
+    <button class="btn btn-dark" onclick="location.href='https://localhost:5001/Connections/CreateNewConnection'">New Connection</button>
+</div>
+
+<div class="card-header" style="text-align: center">
+    <p>Connections</p>
+</div>
+<div class="row">
+    @foreach (var thsConnection in Model) {
+        <div class="col-2 card-body">
+            @thsConnection.Id
+        </div>
+        <div class="col-4 card-body">
+            @thsConnection.Author.FirstName @thsConnection.Author.LastName
+        </div>
+        <div class="col-4 card-body">
+            @thsConnection.Book.Name (@thsConnection.Book.ReleaseYear)
+        </div>
+        <div class="col-1 card-body">
+            <a asp-controller="Connections" asp-action="RemoveConnection" asp-route-rmvConnection="@thsConnection.Id">X</a>
+        </div>
+        <div class="col-1 card-body">
+            <a asp-controller="Connections" asp-action="CheckConnection" 
+               asp-route-givenAuthor="@thsConnection.Author.Id" asp-route-givenBook="@thsConnection.Book.Id">C</a>
+        </div>
+    }
+</div>

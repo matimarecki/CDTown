@@ -6,8 +6,10 @@ namespace ProjectZero.Controllers {
     public class AuthorsController : Controller {
 
         private readonly IAuthorService _service;
-        public AuthorsController (IAuthorService service) {
+        private readonly IAuthorBookConnectionService _service2;
+        public AuthorsController (IAuthorService service, IAuthorBookConnectionService service2) {
             this._service = service;
+            this._service2 = service2;
         }
 
         public IActionResult Index() {

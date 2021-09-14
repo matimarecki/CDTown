@@ -17,4 +17,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\FileExplorerUser\Models" />
+    <Folder Include="Areas\FileExplorerUser\Services" />
+  </ItemGroup>
+
 </Project>

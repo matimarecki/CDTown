@@ -11,7 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using ProjectZero.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using Microsoft.Extensions.Hosting;
+using ProjectZero.Areas.FileExplorerAdmin.Services;
 using ProjectZero.Models;
 using ProjectZero.Services;
 
@@ -28,6 +30,8 @@ namespace ProjectZero
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddTransient<IFileExplorerPathingService, FileExplorerPathingService>();
+            services.AddTransient<IFolderService, FolderService>();
             services.AddTransient<IAuthorBookConnectionService, AuthorBookConnectionService>();
             services.AddTransient<IAuthorService, AuthorService>();
             services.AddTransient<IBookService, BookService>();
@@ -63,8 +67,11 @@ namespace ProjectZero
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseEndpoints(endpoints => {
+                endpoints.MapAreaControllerRoute(
+                    name: "Area",
+                    areaName:"FileExplorerAdmin",
+                    pattern: "FileExplorerAdmin/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

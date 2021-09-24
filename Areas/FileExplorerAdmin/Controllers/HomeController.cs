@@ -13,9 +13,7 @@ namespace ProjectZero.Areas.FileExplorerAdmin.Controllers{
     [Route("FileExplorerAdmin")]
     public class HomeController : Controller {
         private readonly IFolderService _service;
-        // private readonly IFileExplorerPathingService _pathingService;
         public HomeController (IFolderService service) {
-            // this._pathingService = pathingService;
             this._service = service;
         }
         
@@ -31,7 +29,6 @@ namespace ProjectZero.Areas.FileExplorerAdmin.Controllers{
         
         [Route("FolderAdder")]
         public IActionResult FolderAdder(int papaFolderId) {
-            Console.WriteLine(papaFolderId);
             return View(papaFolderId);
         }
 
@@ -50,11 +47,7 @@ namespace ProjectZero.Areas.FileExplorerAdmin.Controllers{
             Console.WriteLine(helperFolderModel.ParentId);
             return RedirectToAction("Index", new{currId = helperFolderModel.ParentId});
         }
-        [Route("FolderCounter")]
-        public IActionResult FolderCounter() {
-            Console.WriteLine(this._service.CountMyFolders());
-            return RedirectToAction("Index");
-        }
+        
 
         [HttpPost]
         [Route("AddFolder")]
@@ -75,11 +68,6 @@ namespace ProjectZero.Areas.FileExplorerAdmin.Controllers{
             return RedirectToAction("Index", new {currId = parentId});
         }
         
-        [Route("MoveDownToFolder")]
-        public IActionResult MoveDownToFolder(int destinationFolderId) {
-            // this._pathingService.AddFolderToCurrentPath(this._service.GetSpecificFolder(destinationFolderId));
-            return RedirectToAction("Index", new {currId = destinationFolderId});
-        }
 
         [Route("MoveUpOneFolder")]
         public IActionResult MoveUpOneFolder(int currentId) {
@@ -121,24 +109,8 @@ namespace ProjectZero.Areas.FileExplorerAdmin.Controllers{
             }
             return RedirectToAction("Index", new {currId = currentId});
         }
-        // public IActionResult MoveUpOneFolder(int parentId) {
-        //     this._pathFolderList.RemoveAt(this._pathFolderList.Count - 1);
-        //     return RedirectToAction("Index", parentId);
-        // }
-        // public IActionResult MoveUpToFolderByPath(int thatFolderId) {
-        //     List<FolderModel> belowThatFolder = this._pathFolderList
-        //         .Where(n => n.Id > thatFolderId).ToList();
-        //     foreach (var movingUpInPath in belowThatFolder) {
-        //         this._pathFolderList.Remove(movingUpInPath);
-        //     }
-        //     return RedirectToAction("Index", thatFolderId);
-        // }
-        [Route("ReturnToRootFolder")]
-        public IActionResult ReturnToRootFolder() {
-            // foreach (var getRidOfIt in this._pathingService.ShowCurrentPath()) {
-            //     this._pathingService.RemoveFolderFromCurrentPath(getRidOfIt);
-            // }
-            return RedirectToAction("Index");
-        }
+        
+        
+        
     }
 }

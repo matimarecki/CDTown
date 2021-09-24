@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\FileExplorerUser\Models" />
-    <Folder Include="Areas\FileExplorerUser\Services" />
+    <Folder Include="wwwroot\Uploads" />
   </ItemGroup>
 
 </Project>

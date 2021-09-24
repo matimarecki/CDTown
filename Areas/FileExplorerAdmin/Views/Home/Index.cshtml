@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="col-1" style="text-align: center; font-size: 20px">
-            <a asp-controller="Home" asp-action="ReturnToRootFolder">H</a>
+            <a asp-area="FileExplorerAdmin" asp-controller="Home" asp-action="Index">H</a>
         </div>
         <div class="col-1" style="text-align: center; font-size: 20px">
             <a asp-controller="Home" asp-action="MoveUpOneFolder" asp-route-currentId="@currId">&#8593</a>
@@ -57,7 +57,7 @@
         Accessibility
     </div>
     <div class="col-1">
-        <a asp-controller="Home" asp-action="FolderCounter">C</a>
+        
     </div>
     <div class="col-1">
         <a asp-area="FileExplorerAdmin" asp-controller="Home" asp-action="ShowPath" 
@@ -68,8 +68,8 @@
     @foreach (var seenFolder in Model.GivenFolderList) {
         <div class="row mt-2">
             <div class="col-4">
-                <a asp-area="FileExplorerAdmin" asp-controller="Home" asp-action="MoveDownToFolder"
-                   asp-route-destinationFolderId="@seenFolder.Id"> @seenFolder.FolderName </a>
+                <a asp-area="FileExplorerAdmin" asp-controller="Home" asp-action="Index"
+                   asp-route-currId="@seenFolder.Id"> @seenFolder.FolderName </a>
             </div>
             <div class="col-3">
                 @seenFolder.DateCreated

@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using Microsoft.Extensions.Hosting;
 using ProjectZero.Areas.FileExplorerAdmin.Services;
+using ProjectZero.Areas.FileExplorerUser.Services;
 using ProjectZero.Models;
 using ProjectZero.Services;
 
@@ -30,6 +31,8 @@ namespace ProjectZero
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddTransient<IUserFileService, UserFileService>();
+            services.AddTransient<IUserFolderService, UserFolderService>();
             services.AddTransient<IFileExplorerPathingService, FileExplorerPathingService>();
             services.AddTransient<IFolderService, FolderService>();
             services.AddTransient<IAuthorBookConnectionService, AuthorBookConnectionService>();
